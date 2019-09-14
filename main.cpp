@@ -54,7 +54,7 @@ int main(void)
 								break;
 							}
 						}
-						if(!i->IsDone())
+						if(i->IsDone())
 							cout << "Data this person is not found" << endl;
 						delete myNote;
 					}
