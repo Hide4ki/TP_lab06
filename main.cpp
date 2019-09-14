@@ -108,12 +108,10 @@ void sortList(List<Note*>&myList)
 	int min;
 	for(int i = 0;i<myList.Count()-1;i++) 
 	{
-		min = i;
 		for(int j = i + 1;j<myList.Count();j++) 
 		{
-			if(*myList.Get(min) > *myList.Get(j))
-				min = j;
-			myList.Swap(myList.Get(i),myList.Get(min));
+			if(*myList.Get(i) > *myList.Get(j))
+				myList.Swap(myList.Get(i),myList.Get(j));
 		}
 	}
 }
