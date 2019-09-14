@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "ListIterator.h"
-#include "Item.h"
+
 #define DEFUALT_LIST_CAPACITY 10
 template <class T>
 class ListIterator;
@@ -31,6 +31,8 @@ public:
 	void RemoveFirst(void);
 	void RemoveAll(void);
 
+	void Swap(T&, T&);
+
 	T& Top(void) const;
 	void Push(const T&);
 	T& Pop(void);
@@ -52,6 +54,16 @@ private:
 	long _casheSize;
 	bool *_cashcorrect;
 };
+
+template <class T>
+void List<T>::Swap(T&A, T&B)
+{
+	Elem *t1 = SearchElem(A);
+	Elem *t2 = SearchElem(B);
+	T C = *t1->item;
+	*t1->item = *t2->item;
+	*t2->item = C;
+}
 
 template <class T>
 class List<T>::Elem
@@ -82,17 +94,21 @@ bool List<T>::Elem::fictitious(void)
 template <class T>
 List<T>::Elem::Elem(void):next(0),prev(0),item(0)
 {
+	cout << "Object of class - Elem" << endl << "Magic method - constructor without parameters" << endl;
 }
 
 template <class T>
 List<T>::Elem::~Elem(void)
 {
+	cout << "Object of class - Elem" << endl << "Magic method - destructor" << endl;
 	delete item;
 }
 
 template <class T>
 List<T>::List(const List<T> &myList)
 {
+	cout << "Object of class - "<< typeid(*this).name() << endl << "Magic method - constructor for copy" << endl;
+	
 	Init();
 
 	ListIterator<T> i(&myList);
@@ -104,6 +120,7 @@ List<T>::List(const List<T> &myList)
 template <class T>
 List<T>::List(long size)
 {
+	cout << "Object of class - " << typeid(*this).name() << endl << "Magic method - constructor with parameters" << endl;
 	Init();
 
 	Elem *temp = _first = _last = new Elem;
@@ -121,6 +138,8 @@ List<T>::List(long size)
 template <class T>
 List<T>::~List(void)
 {
+	cout << "Object of class - " << typeid(*this).name() << endl << "Magic method - destructor" << endl;
+
 	Elem *i = _first;
 	_first->prev->next = 0;
 	while(i->next)
@@ -424,7 +443,7 @@ ListIterator<T> *List<T>::GetCorrectIterator(void)
 template <class T>
 typename List<T>::Elem *List<T>::SearchElem(const T &searchItem)
 {
-	Elem<T> *now = _first;
+	Elem *now = _first;
 	
 	while(now!=_last)
 	{

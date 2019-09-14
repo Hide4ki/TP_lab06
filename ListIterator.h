@@ -23,6 +23,7 @@ private:
 template <class T>
 ListIterator<T>::ListIterator(const List<T> *aList):_list(aList),_current(0)
 {
+	cout << "Object of class - " << typeid(*this).name() << endl << "Magic method - constructor with parameters" << endl;
 }
 
 template <class T>
