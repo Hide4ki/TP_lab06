@@ -14,7 +14,7 @@ public:
 	Iterator<T>* operator->(void);
 	Iterator<T>& operator*(void);
 private:
-  IteratorPtr(const IteratorPtr&) = delete;
+    IteratorPtr(const IteratorPtr&) = delete;
 	IteratorPtr& operator=(const IteratorPtr&) = delete;
 	Iterator<T>* _i;
 };

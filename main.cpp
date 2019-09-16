@@ -1,9 +1,11 @@
+#include <limits>
 #include <iostream>
 #include "MyException.h"
 #include "Note.h"
 #include "List.h"
 #include "IteratorPtr.h"
 #include "WorkEnd.h"
+#include "Interpretator.h"
 
 using namespace std;
 
@@ -14,6 +16,7 @@ typedef enum {ADD, FIND, SORT, SHOW, END} COMMAND;
 int main(void)
 {	
 	cout << "Good day!=)" << endl;
+	cout << "Task #1" << endl;
 	List<Note*> *ListNote = new List<Note*>(1);
 	while(1)
 	{
@@ -30,6 +33,13 @@ int main(void)
 			<<END<< " - end work.)" << endl;
 
 			cin >> command;
+			while (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cout << "Error!!! Input don't correct, repeat input!!" << endl;
+				cin >> command;
+			}
 
 			switch((COMMAND)command)
 			{
@@ -99,6 +109,13 @@ int main(void)
 		delete i->CurrentItem();
 	}
 	delete ListNote;
+	cout << "Task #2"<< endl;
+	string name;
+	cout << "Enter name file:";
+	cin >> name;
+	Interpretator *myInterpetation = new Interpretator(name);
+	cout << *myInterpetation;
+	delete myInterpetation;
 	system("pause");
 	return 0;
 }

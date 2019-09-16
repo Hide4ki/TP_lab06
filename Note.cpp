@@ -1,4 +1,5 @@
 #include "Note.h"
+#include <limits>
 
 Note::Note(void)
 {
@@ -115,5 +116,23 @@ istream &operator >> (istream &stream, Note &myNote)
   stream >> myNote.dateBurn[1];
   cout << "Input Year:";
   stream >> myNote.dateBurn[2];
+  while (stream.fail())
+  {
+    stream.clear();
+    stream.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Error!!! Input don't correct, repeat input!!" << endl;
+    cout << "Input Name:";
+    stream >> myNote.name  ;
+    cout << "Input Surname:";
+    stream >> myNote.surname ;
+    cout << "Input Number:";
+    stream >> myNote.number  ;
+    cout << "Input Day:";
+    stream >> myNote.dateBurn[0];
+    cout << "Input Month:";
+    stream >> myNote.dateBurn[1];
+    cout << "Input Year:";
+    stream >> myNote.dateBurn[2];
+  } 
   return stream;
 }
